@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Circle range display of current location</title>
+<style>html,body{height:100%;}body{padding:0;margin:0;}h1{padding:0;margin:0;font-size:50%;}</style>
+</head>
+<body>
+
+
+<!-- MAP[START] -->
+<h1>Circle range display of current location</h1>
+<div id="myMap" style='width:60%;height:70%;float:left;'></div>
+<!-- MAP[END] -->
+
+
+<script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[ *** YOUR MY KEY *** ]' async defer></script>
+<script src="js/BmapQuery.js"></script>
+<script>
+//****************************************************************************************
+// BingMaps&BmapQuery
+//****************************************************************************************
+//Init
+function GetMap(){
+    //------------------------------------------------------------------------
+    //1. Instance
+    //------------------------------------------------------------------------
+    const map = new Bmap("#myMap");
+
+    //------------------------------------------------------------------------
+    //2. Display Map
+    //   startMap(lat, lon, "MapType", Zoom[1~20]);
+    //   MapType:[load, aerial,canvasDark,canvasLight,birdseye,grayscale,streetside]
+    //--------------------------------------------------
+    map.startMap(35.691550, 139.744371, "load", 13);
+
+    //------------------------------------------------------------------------
+    //3.Circle Add
+    //  circleSet( Meter, style={pinColor,fillColor,strokeWidth} );
+    //------------------------------------------------------------------------
+    //Blue
+    const style = {
+        pinColor:"#0000ff",
+        fillColor:"rgba(0,0,100,0.6)",
+        strokeWidth:1
+    };
+    map.circle(1000, style); //1000m = 1km, 2000 = 2Km
+    map.circle(3000, style); //1000m = 1km, 2000 = 2Km
+
+    const options = [];
+    options[0]={
+        "lat":35.691191, 
+        "lon":139.735614,
+        "title":"市ヶ谷",
+        "pinColor":"#ff0000",
+        "height":300,
+        "width":320,
+        "description": 'Byoudouin<br><img src="../img/ichi.jpeg" width="300">',
+        "show":false
+    };
+    options[1]={
+        "lat":35.685699, 
+        "lon":139.741648,
+        "title":"半蔵門",
+        "pinColor":"#ff0000",
+        "height":300,
+        "width":320,
+        "description": 'Kinkakuji<br><img src="../img/han.jpeg" width="300">',
+        "show":false
+    };
+    options[2]={
+        "lat":35.699856,
+        "lon":139.763779,
+        "title":"御茶ノ水",
+        "pinColor":"#ff0000",
+        "height":300,
+        "width":320,
+        "description": 'Ginkakuji<br><img src="../img/ocha.jpeg" width="300">',
+        "show":false
+    };
+    options[3]={
+        "lat":35.665245,
+        "lon":139.712311,
+        "title":"表参道",
+        "pinColor":"#ff0000",
+        "height":300,
+        "width":320,
+        "description": 'Ginkakuji<br><img src="../img/omo.jpeg" width="300">',
+        "show":false
+    };
+    options[4]={
+        "lat":35.705604,
+        "lon":139.752026,
+        "title":"東京ドーム",
+        "pinColor":"#ff0000",
+        "height":300,
+        "width":320,
+        "description": 'Ginkakuji<br><img src="../img/tou.jpeg" width="300">',
+        "show":false
+    };
+    
+    //----------------------------------------------------
+    //4. Switch infoboxs
+    //   infoboxLayers(options, true); //true=one, false=Multiple
+    //----------------------------------------------------
+    map.infoboxLayers(options,true);
+
+}
+    
+
+</script>
+</body>
+</html>
