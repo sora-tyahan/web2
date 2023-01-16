@@ -85,7 +85,7 @@ img{height:100px;}
     <div class="container-fluid">
     <div class="navbar-header"><a class="navbar-brand" href="#">写真アップロード</a></div>
       <ul class="pager">
-      <li class="previous"><a href="file_chek.html">← カメラ／写真選択</a></li>
+      <li class="previous"><a href="index.html">← カメラ／写真選択</a></li>
       <li class="next disabled"><a href="file_view.php">画像一覧</a></li>
       </ul>
      </div>
@@ -97,7 +97,13 @@ img{height:100px;}
 <!-- IMG_LIST[Start] -->
 <div id="myMap" style="width:700px;height:500px;"></div>
 <!-- IMG_LIST[END] -->
-
+<button id="del" style=
+" display: inline-block;
+  position: relative;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  color: #000;
+  transition: .4s;">閉じる</button>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=Aucw16lkEUkWMUZ64QtgInY2wk5STqinP0F2msDB7tKhb0pBbM-wXV9GA25y6DMO' async defer></script>
@@ -124,17 +130,31 @@ function GetMap(){
     // pin&InfoBoxを挿入
     //* 配列の長さを取得
     let len = lat.length;
+    let a=[];
     //* forループで配列の数だけ処理をする
     for(let i=0; i<len; i++){
         //* 最初にpin,次にinfoboxHtml
-            map.pin(lat[i],lon[i],"#ff0000");
-            let h = '<div style="background-color:#ffffff;padding:20px;border-radius: 50px 2px;border:3px solid #ccc">'+name[i]+'<br><img src="upload/'+img[i]+'"<br><br>'+naiyou[i]+'</div>';
-            map.infoboxHtml(lat[i],lon[i],h);
-    }
+            a[i] = map.pin(lat[i],lon[i],"#ff0000");
+            let h = '<div id="del'+i+'" style="background-color:#ffffff;padding:20px;border-radius: 50px 2px;border:3px solid #ccc">'+name[i]+'<br><img class="clear" src="upload/'+img[i]+'"<br><br>'+naiyou[i]+'</div>';
+            map.onPin(a[i],"click",function(){
+                map.infoboxHtml(lat[i],lon[i],h);
+                $("#del"+i).on("click",function(){
+                    map.crearInfobox();
+                });
+            });
+
+    } 
     //* map.changeMapを使って最後の座標を中心に表示する！
     map.changeMap(lat[len-1],lon[len-1],"load",zoom);
-}
 
+
+    
+}
+window.onload=function(){
+    $("#del").on("click",function(){
+            map.crearInfobox();
+    });
+}
 </script>
 </body>
 </html>

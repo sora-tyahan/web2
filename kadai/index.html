@@ -51,11 +51,19 @@
             <p><a href="#" id="select_btn" class="btn btn-primary btn-lg">カメラ/写真選択</a></p>
             <form method="post" action="fileup.php" enctype="multipart/form-data">
                 <input type="file" accept="image/*" capture="camera" id="image_file" value="" name="upfile" style="opacity:0;">
+                名前
+                <br>
                 <input type="text" name="name">
+                <br><br>
+                内容
+                <br>
+                <input type="text" name="naiyo">
                 <input type="submit" id="upload_btn" class="btn btn-success btn-lg" value="Fileアップロード">
                 <input type="hidden" name="lat" id="lat">
                 <input type="hidden" name="lon" id="lon">
             </form>
+            <br>
+            <h2><a href="map_view.php">MAP</h2>
         </div>
         <div id="photarea">
             <!-- ここにPHPの変数を記述 -->

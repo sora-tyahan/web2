@@ -4,20 +4,20 @@
  // *  FileList（画像ファイル一覧表示）
  //**********************************************************
 
-////ディレクトリパス
-$img_path = "upload";
-// //走査するディレクトリを指定
-$directry= new RecursiveDirectoryIterator($img_path);
-////指定したディレクトリから反復処理でデータを取得
-$files = new RecursiveIteratorIterator($directry);
-
-////画像を繰返し取得表示
-foreach($files as $file){
-    if( $file->isFile() ){
-        $list .= '<img src="'.$file->getPathname() . '"><br>';
-    }
-}
-
+ ////ディレクトリパス
+ $img_path = "upload";
+ // //走査するディレクトリを指定
+ $directry= new RecursiveDirectoryIterator($img_path);
+ ////指定したディレクトリから反復処理でデータを取得
+ $files = new RecursiveIteratorIterator($directry);
+ 
+ 
+ ////画像を繰返し取得表示
+ foreach($files as $file){
+     if( $file->isFile() ){
+         $list .= '<img src="'.$file->getPathname() . '"><br><br>';
+     }
+ }
 
 
 
@@ -48,7 +48,7 @@ img{height:200px;}
     <div class="container-fluid">
     <div class="navbar-header"><a class="navbar-brand" href="#">写真アップロード</a></div>
       <ul class="pager">
-      <li class="previous"><a href="file_chek.html">← カメラ／写真選択</a></li>
+      <li class="previous"><a href="index.html">← カメラ／写真選択</a></li>
       <li class="next disabled"><a href="file_view.php">画像一覧</a></li>
       </ul>
      </div>
@@ -72,7 +72,10 @@ img{height:200px;}
 <!-- *** jQuery読み込み！！ *** -->
 <script src="js/jquery-2.1.3.min.js"></script>
 <script>
-
+    $("#img_width_range").on("change",function(){
+        $("img").css( "height", $(this).val() + "px" ); //画像サイズ 
+        $("#heigth_txt").text( $(this).val() + "px" ); //**pxの文字
+    });
 
 
 
@@ -83,4 +86,6 @@ img{height:200px;}
 </html>
 
 
-
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
